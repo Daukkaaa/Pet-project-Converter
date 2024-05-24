@@ -79,51 +79,55 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 }
-
+  
 .body h2 {
     font-size: 36px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     font-weight: 600;
 }
-
+  
 .converter-card {
+    background-color: #fff;
     border: 2px solid rgb(3, 1, 47);
     border-radius: 10px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    padding: 40px 30px;
     gap: 30px;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+  
+.select-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+  
+.custom-select .react-select__control {
+    padding: 10px;
+    font-size: 18px;
+}
+  
 .input-group {
     display: flex;
     flex-direction: row;
-    gap: 80px;
+    gap: 20px;
 }
-
-select,
+  
 input[type="number"] {
-    padding: 25px 20px;
-    font-size: 20px;
+    padding: 15px 20px;
+    font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 100%;
 }
-
-input:focus, select:focus {
+  
+input[type="number"]:focus {
     outline: none;
     border-color: rgb(3, 1, 47);
-}
-
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M4 6l4 4 4-4" stroke="%232c3e50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 10px center;
-    background-size: 12px;
-    background-color: #fff;
 }
