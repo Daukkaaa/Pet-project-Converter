@@ -145,5 +145,24 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: scale(1.8);
     cursor: pointer;
 }
+  
+.date-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+  
+.date-group label {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+  
+.date-group input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
 

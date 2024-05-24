@@ -8,6 +8,8 @@ const apiKey = "df6f896c78584f158072d031778c39f2";
 const baseUrl = `https://openexchangerates.org/api/latest.json?app_id=${apiKey}`;
 
 const Body = (props) => {
+
+
   const currencyOptions = Object.keys(props.currencyData).map(currency => ({
     value: currency,
     label: (
@@ -24,9 +26,13 @@ const Body = (props) => {
 
   const [rates, setRates] = useState({});
   const [fromCurrency, setFromCurrency] = useState(currencyOptions[0]);
-  const [toCurrency, setToCurrency] = useState(currencyOptions[3]);
+  const [toCurrency, setToCurrency] = useState(currencyOptions[4]);
   const [fromAmount, setFromAmount] = useState(1);
   const [toAmount, setToAmount] = useState(0);
+  const [date, setDate] = useState("");
+  const [historicalRates, setHistoricalRates] = useState(null);
+
+
 
   useEffect(() => {
     axios.get(baseUrl).then(response => {
@@ -41,7 +47,18 @@ const Body = (props) => {
     }
   }, [fromCurrency, toCurrency, fromAmount, rates]);
 
-  function handleChange(e) {
+  useEffect(() => {
+    if (date) {
+      const historicalUrl = `https://openexchangerates.org/api/historical/${date}.json?app_id=${apiKey}`;
+      axios.get(historicalUrl).then(response => {
+        setHistoricalRates(response.data.rates)
+      })
+    }
+  }, [date])
+
+
+
+  function handleAmountChange(e) {
     setFromAmount(e.target.value);
   };
 
@@ -49,6 +66,11 @@ const Body = (props) => {
     setFromCurrency(toCurrency);
     setToCurrency(fromCurrency);
   }
+
+  function handleDateChange(e) {
+    setDate(e.target.value)
+  }
+
 
 
   return (
@@ -79,7 +101,7 @@ const Body = (props) => {
             type="number"
             placeholder="Amount"
             value={fromAmount}
-            onChange={handleChange}
+            onChange={handleAmountChange}
           />
           <input
             type="number"
@@ -88,12 +110,28 @@ const Body = (props) => {
             readOnly
           />
         </div>
+        <div className="date-group">
+          <label htmlFor="date">Select Date:</label>
+          <input 
+            type="date"
+            id="date"
+            value={date}
+            onChange={handleDateChange}
+          />
+        </div>
+        {historicalRates && (
+          <div className="historical-rates">
+            <h3>Historical Rates on {date}</h3>
+            <p>1 {fromCurrency.value} = {(historicalRates[toCurrency.value] / historicalRates[fromCurrency.value]).toFixed(2)} {toCurrency.value}</p>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default Body;
+
 
 
 
