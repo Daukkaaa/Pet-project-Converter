@@ -110,6 +110,7 @@ const Body = (props) => {
             readOnly
           />
         </div>
+        <div className="date">
         <div className="date-group">
           <label htmlFor="date">Select Date:</label>
           <input 
@@ -125,6 +126,7 @@ const Body = (props) => {
             <p>1 {fromCurrency.value} = {(historicalRates[toCurrency.value] / historicalRates[fromCurrency.value]).toFixed(2)} {toCurrency.value}</p>
           </div>
         )}
+        </div> 
       </div>
     </div>
   );

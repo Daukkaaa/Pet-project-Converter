@@ -3,7 +3,7 @@ const styles = {
       ...baseStyles,
       padding: "0 10px",
       fontSize: "20px",
-      border: "1px solid #ccc",
+      border: "1px solid rgb(3, 1, 47)",
       borderRadius: "5px",
       width: "100%", 
       display: "flex",
@@ -24,6 +24,7 @@ const styles = {
     dropdownIndicator: (baseStyles) => ({
       ...baseStyles,
       padding: "0",
+      color: 'rgb(3, 1, 47)'
     }),
 };
 
