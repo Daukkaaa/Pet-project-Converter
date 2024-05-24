@@ -56,6 +56,34 @@ const Body = () => {
     setFromAmount(e.taret.value)
   };
 
+  const styles = {
+    control: (baseStyles) => ({
+      ...baseStyles,
+      padding: "15px 25px",
+      fontSize: "20px",
+      border: "1px solid #ccc",
+      borderRadius: "5px",
+      width: "100%", 
+      display: "flex",
+      alignItems: "center",
+      height: "50px", 
+      boxSizing: "border-box"
+    }),
+    singleValue: (baseStyles) => ({
+      ...baseStyles,
+      display: "flex",
+      alignItems: "center",
+    }),
+    indicatorSeparator: (baseStyles) => ({
+      ...baseStyles,
+      display: "none",
+    }),
+    dropdownIndicator: (baseStyles) => ({
+      ...baseStyles,
+      padding: "0",
+    }),
+  };
+
 
   return (
     <div className="body">
@@ -67,26 +95,14 @@ const Body = () => {
             options={currencyOptions}
             value={fromCurrency}
             onChange={setFromCurrency}
-            styles={{
-              control: (baseStyles, state) => ({
-                ...baseStyles,
-                padding: "15px 20px",
-                border: "1px solid #ccc",
-                width: "100%",
-              }),
-            }}
+            styles={styles}
           />
           <Select
             className="custom-select"
             options={currencyOptions}
             value={toCurrency}
             onChange={setToCurrency}
-            styles={{
-              control: (baseStyles, state) => ({
-                ...baseStyles,
-                padding: '20px 40px'
-              }),
-            }}
+            styles={styles}
           />
         </div>
         <div className="input-group">
@@ -105,6 +121,7 @@ const Body = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Body;
