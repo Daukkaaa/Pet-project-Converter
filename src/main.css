@@ -98,20 +98,21 @@ body {
     align-items: center;
     gap: 30px;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
   
 .select-group {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 20px;
 }
   
 .input-group {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 60px;
 }
   
 input[type="number"] {
@@ -129,17 +130,20 @@ input[type="number"]:focus {
     border-color: rgb(3, 1, 47);
 }
 
-.select-group, .input-group {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.switch {
+    display: flex;
+    padding: 0;
+}
+
+.switch-icon {
+    transform: scale(1.8);
+    cursor: pointer;
 }
 
 
