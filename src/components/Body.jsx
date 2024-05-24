@@ -53,26 +53,28 @@ const Body = () => {
 
 
   function handleChange(e) {
-    setFromAmount(e.taret.value)
+    setFromAmount(e.target.value)
   };
+  
 
   const styles = {
     control: (baseStyles) => ({
       ...baseStyles,
-      padding: "15px 25px",
+      padding: "0 10px",
       fontSize: "20px",
       border: "1px solid #ccc",
       borderRadius: "5px",
       width: "100%", 
       display: "flex",
       alignItems: "center",
-      height: "50px", 
-      boxSizing: "border-box"
+      height: "70px", 
+      boxSizing: "border-box",
     }),
     singleValue: (baseStyles) => ({
       ...baseStyles,
       display: "flex",
       alignItems: "center",
+      paddingRight: "150px", 
     }),
     indicatorSeparator: (baseStyles) => ({
       ...baseStyles,
@@ -116,6 +118,8 @@ const Body = () => {
             type="number"
             placeholder="Converted Amount"
             value={toAmount}
+            onChange={handleChange}
+            readOnly
           />
         </div>
       </div>
@@ -130,15 +134,3 @@ export default Body;
 
 
 
-
-
-
-
-
-
-/*
-
-
-
-          
-*/

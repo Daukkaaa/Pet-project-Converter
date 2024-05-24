@@ -115,12 +115,12 @@ body {
 }
   
 input[type="number"] {
-    padding: 15px 25px;
+    padding: 15px 20px;
     font-size: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: calc(50% - 10px); 
-    height: 50px; 
+    height: 70px; 
     box-sizing: border-box;
   }
   
@@ -135,4 +135,11 @@ input[type="number"]:focus {
     justify-content: space-between;
     gap: 20px;
 }
-  
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
