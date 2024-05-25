@@ -3,12 +3,13 @@ import axios from "axios";
 import Select from 'react-select';
 import ReactCountryFlag from "react-country-flag";
 import { CgArrowsExchange } from "react-icons/cg";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 const apiKey = "df6f896c78584f158072d031778c39f2";
 const baseUrl = `https://openexchangerates.org/api/latest.json?app_id=${apiKey}`;
 
 const Body = (props) => {
-
 
   const currencyOptions = Object.keys(props.currencyData).map(currency => ({
     value: currency,
@@ -29,37 +30,52 @@ const Body = (props) => {
   const [toCurrency, setToCurrency] = useState(currencyOptions[4]);
   const [fromAmount, setFromAmount] = useState(1);
   const [toAmount, setToAmount] = useState(0);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date()); 
   const [historicalRates, setHistoricalRates] = useState(null);
-
 
 
   useEffect(() => {
     axios.get(baseUrl).then(response => {
       setRates(response.data.rates);
     });
+
+    const currentDate = new Date(); 
+    setDate(currentDate); 
   }, []);
 
   useEffect(() => {
-    if (rates[fromCurrency.value] && rates[toCurrency.value]) {
+    if (historicalRates) {
+      if (historicalRates[fromCurrency.value] && historicalRates[toCurrency.value]) {
+        const conversionRate = historicalRates[toCurrency.value] / historicalRates[fromCurrency.value];
+        setToAmount((fromAmount * conversionRate).toFixed(2));
+      }
+    } else if (rates[fromCurrency.value] && rates[toCurrency.value]) {
       const conversionRate = rates[toCurrency.value] / rates[fromCurrency.value];
       setToAmount((fromAmount * conversionRate).toFixed(2));
     }
-  }, [fromCurrency, toCurrency, fromAmount, rates]);
+  }, [fromCurrency, toCurrency, fromAmount, rates, historicalRates]);
 
   useEffect(() => {
     if (date) {
-      const historicalUrl = `https://openexchangerates.org/api/historical/${date}.json?app_id=${apiKey}`;
+      const formattedDate = date.toISOString().split("T")[0];
+      const historicalUrl = `https://openexchangerates.org/api/historical/${formattedDate}.json?app_id=${apiKey}`;
       axios.get(historicalUrl).then(response => {
-        setHistoricalRates(response.data.rates)
-      })
+        setHistoricalRates(response.data.rates);
+      });
     }
-  }, [date])
+  }, [date]);
 
 
 
   function handleAmountChange(e) {
     setFromAmount(e.target.value);
+    if (historicalRates) {
+      const conversionRate = historicalRates[toCurrency.value] / historicalRates[fromCurrency.value];
+      setToAmount((e.target.value * conversionRate).toFixed(2));
+    } else {
+      const conversionRate = rates[toCurrency.value] / rates[fromCurrency.value];
+      setToAmount((e.target.value * conversionRate).toFixed(2));
+    }
   };
 
   function flip() {
@@ -67,8 +83,14 @@ const Body = (props) => {
     setToCurrency(fromCurrency);
   }
 
-  function handleDateChange(e) {
-    setDate(e.target.value)
+  function handleDateChange(date) {
+    setDate(date)
+  }
+
+  function setToToday() {
+    const today = new Date();
+    setDate(today);
+    setHistoricalRates(null); 
   }
 
 
@@ -113,16 +135,18 @@ const Body = (props) => {
         <div className="date">
         <div className="date-group">
           <label htmlFor="date">Select Date:</label>
-          <input 
-            type="date"
-            id="date"
-            value={date}
+          <DatePicker 
+            selected={date}
             onChange={handleDateChange}
+            dateFormat="yyyy-MM-dd"
+            minDate={new Date("1999-01-01")}
+            className="custom-datepicker"
           />
+          <button onClick={setToToday} className="today-button">Today</button>
         </div>
-        {historicalRates && (
+        {historicalRates && ( 
           <div className="historical-rates">
-            <h3>Historical Rates on {date}</h3>
+            <h3>Historical Rates on {date.toISOString().split("T")[0]}</h3>
             <p>1 {fromCurrency.value} = {(historicalRates[toCurrency.value] / historicalRates[fromCurrency.value]).toFixed(2)} {toCurrency.value}</p>
           </div>
         )}

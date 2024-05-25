@@ -42,3 +42,4 @@ const currencyData = {
 };
 
 export default currencyData;
+
