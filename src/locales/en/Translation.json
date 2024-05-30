@@ -12,5 +12,7 @@
         "placeholder": "password placeholder..."
     },
     "location": "Enter the location",
-    "Address": "Enter the address"
+    "Address": "Enter the address",
+    "News": "News",
+    "Help": "Help"
 }

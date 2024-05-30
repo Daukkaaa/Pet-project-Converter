@@ -7,7 +7,6 @@ import styles from "./components/SelectStyle.jsx";
 import News from "./components/News.jsx";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import LanguageSelector from './components/LanguageSelector';
 
 
 const newsApiKey = "b059c19575e4498fa90c7fbd6640b7d5";

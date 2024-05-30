@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './i18n'; 
+import './i18n'
 
 const app = ReactDOM.createRoot(document.getElementById('app'));
 app.render(
