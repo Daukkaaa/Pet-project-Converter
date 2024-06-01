@@ -14,5 +14,9 @@
     "location": "Enter the location",
     "Address": "Enter the address",
     "News": "News",
-    "Help": "Help"
+    "Help": "Help",
+    "Currency Converter": "Currency Converter",
+    "Select Date": "Select Date",
+    "Today": "Today",
+    "Historical Rates on": "Historical Rates on"
 }

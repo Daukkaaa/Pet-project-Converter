@@ -30,7 +30,7 @@ const Header = (props) => {
     <div className="header">
       <div className="left">
         <input
-          placeholder="News"
+          placeholder={t("News")}
           value={input}
           onChange={inputChange}
           onKeyDown={handleKeyPress}

@@ -5,6 +5,7 @@ import ReactCountryFlag from "react-country-flag";
 import { CgArrowsExchange } from "react-icons/cg";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import { useTranslation } from "react-i18next";
 
 const apiKey = "df6f896c78584f158072d031778c39f2";
 const baseUrl = `https://openexchangerates.org/api/latest.json?app_id=${apiKey}`;
@@ -32,6 +33,8 @@ const Body = (props) => {
   const [toAmount, setToAmount] = useState(0);
   const [date, setDate] = useState(new Date());
   const [historicalRates, setHistoricalRates] = useState(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
@@ -100,7 +103,7 @@ const Body = (props) => {
 
   return (
     <div className="body">
-      <h2>Currency Converter</h2>
+      <h2>{t('Currency Converter')}</h2>
       <div className="converter-card">
         <div className="select-group">
           <Select
@@ -137,7 +140,7 @@ const Body = (props) => {
         </div>
         <div className="date">
           <div className="date-group">
-            <label htmlFor="date">Select Date:</label>
+            <label htmlFor="date">{t('Select Date')}:</label>
             <DatePicker
               selected={date}
               onChange={handleDateChange}
@@ -146,12 +149,12 @@ const Body = (props) => {
               className="custom-datepicker"
             />
             <button onClick={setToToday} className="today-button">
-              Today
+              {t('Today')}
             </button>
           </div>
           {historicalRates && (
             <div className="historical-rates">
-              <h3>Historical Rates on {date.toISOString().split("T")[0]}</h3>
+              <h3>{t('Historical Rates on')} {date.toISOString().split("T")[0]}</h3>
               <p>
                 1 {fromCurrency.value} ={" "}
                 {(
