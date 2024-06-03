@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SlQuestion } from "react-icons/sl";
 import { LuSearch } from "react-icons/lu";
+import { MdLanguage } from "react-icons/md";
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
 
@@ -43,6 +44,7 @@ const Header = (props) => {
           <h3>{t('Help')}</h3>
         </div>
         <div className="lang">
+          <MdLanguage className="lang-icon" />
           <LanguageSelector />
         </div>
       </div>
